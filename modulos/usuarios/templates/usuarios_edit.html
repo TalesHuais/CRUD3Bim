@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+            <div>
+                {{msg}}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <fieldset>
+        <form action="/usuarios/edit-save" method="post">
+            <div>
+                <label for="nome">Nome: </label>
+                <input type="text" name="nome" id="nome" value="{{dados.nome}}">
+            </div>
+            <div>
+                <label for="email">E-Mail: </label>
+                <input type="email" name="email" id="email" value="{{dados.email}}">
+            </div>
+            <input type="hidden" name="id" id="id" value="{{dados.id}}">
+            <button type="submit">Cadastrar</button>
+        </form>
+    </fieldset>
+
+{% endblock %}

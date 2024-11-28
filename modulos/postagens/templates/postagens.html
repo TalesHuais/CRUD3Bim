@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+            <div>
+                {{msg}}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <div class="adicionar">
+        <a href="/postagens/add">+Adicionar</a>
+    </div>
+    <table>
+        <tr>
+            <th>Título</th>
+            <th>Conteúdo</th>
+            <th>Usuário</th>
+            <th>Editar</th>
+            <th>Remover</th>
+        </tr>
+        {% for postagem in dados %}
+        <tr>
+            <td>{{postagem.titulo}}</td>
+            <td>{{postagem.conteudo}}</td>
+            <td>{{postagem.usuario.nome}}</td>
+            <td><a href="/postagens/edit/{{postagem.id}}">[E]</a></td>
+            <td><a href="/postagens/remove/{{postagem.id}}">[X]</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

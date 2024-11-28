@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+            <div>
+                {{msg}}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <fieldset>
+        <form action="/postagens/edit-save" method="post">
+            <div>
+                <label for="titulo">Título: </label>
+                <input type="text" name="titulo" id="titulo" value="{{dados.titulo}}">
+            </div>
+            <div>
+                <label for="conteudo">Conteúdo: </label>
+                <textarea name="conteudo" id="conteudo"></textarea>
+            </div>
+            <div>
+                <label for="usuario">Usuário: </label>
+                <select name="id_usuario" id="usuario">
+                    <option value=""></option>
+                    {% for u in usuarios %}
+                    <option value="{{u.id}}">{{u.nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="hidden" name="id" id="id" value="{{dados.id}}">
+            <button type="submit">Cadastrar</button>
+        </form>
+    </fieldset>
+
+{% endblock %}
